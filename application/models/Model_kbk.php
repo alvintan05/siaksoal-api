@@ -22,7 +22,7 @@ class Model_kbk extends CI_Model {
 	// format camelCase
 	// for the result, this is a simple request you can improve by your self to make a any response
 
-	public function getDaftarSoal($kbk_nip = null)
+	public function getDaftarSoalUas($kbk_nip = null)
 	{
 		if ($kbk_nip != null) {
 
@@ -35,6 +35,37 @@ class Model_kbk extends CI_Model {
 			$init_table_tahun = $this->table_tahun.' t';
 
 			$array = array('s.kbk_nip' =>$kbk_nip, 's.jenis_ujian' => 'UAS');
+
+
+			$this->db->select('s.kode_soal, s.file, m.namamk, st.nama, k.namaklas, t.tahun_akad, t.semester, p.namaprod, s.create_at, s.update_at' );
+
+			$this->db->from($init_table_soal);
+			$this->db->join($init_table_jadwal, 's.uts_uas_kodejdwl = j.kodejdwl');
+			$this->db->join($init_table_matkul, 'j.matakuliah_kodemk = m.kodemk');
+			$this->db->join($init_table_staff, 'j.staff_nip = st.nip');
+			$this->db->join($init_table_kelas, 'j.kelas_kodeklas = k.kodeklas');
+			$this->db->join($init_table_tahun, 'j.thn_akad_thn_akad_id = t.thn_akad_id');
+			$this->db->join($init_table_prodi, 'k.prodi_prodi_id = p.prodi_id');
+			$this->db->where($array);
+
+			$data = $this->db->get();
+			return $data->result_array();
+		}
+	}
+
+	public function getDaftarSoalUts($kbk_nip = null)
+	{
+		if ($kbk_nip != null) {
+
+			$init_table_soal = $this->table_soal.' s';
+			$init_table_jadwal = $this->table_jadwal.' j';
+			$init_table_staff = $this->table_staff.' st';
+			$init_table_matkul = $this->table_matkul.' m';
+			$init_table_kelas = $this->table_kelas.' k';
+			$init_table_prodi = $this->table_prodi.' p';
+			$init_table_tahun = $this->table_tahun.' t';
+
+			$array = array('s.kbk_nip' =>$kbk_nip, 's.jenis_ujian' => 'UTS');
 
 
 			$this->db->select('s.kode_soal, s.file, m.namamk, st.nama, k.namaklas, t.tahun_akad, t.semester, p.namaprod, s.create_at, s.update_at' );
