@@ -1,0 +1,1211 @@
+{
+	"info": {
+		"_postman_id": "898fede2-69e5-4f90-b227-66c99c0787a1",
+		"name": "GWJ API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "user-service",
+			"item": [
+				{
+					"name": "get-user-info",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "userId",
+								"value": "1",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/x-www-form-urlencoded",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "userName",
+									"value": "ussad",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}/UserService/getUserInfo/1",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"UserService",
+								"getUserInfo",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update-user-info",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/x-www-form-urlencoded",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "userName",
+									"value": "ikbals maualan",
+									"type": "text"
+								},
+								{
+									"key": "userEmail",
+									"value": "ikbals maualan",
+									"type": "text"
+								},
+								{
+									"key": "userPicture",
+									"value": "ikbals.png",
+									"type": "text"
+								},
+								{
+									"key": "userNumber",
+									"value": "ikbals maualan",
+									"type": "text"
+								},
+								{
+									"key": "userAddress",
+									"value": "ikbals maualan",
+									"type": "text"
+								},
+								{
+									"key": "userPassword",
+									"value": "ikbals maualan",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}/UserService/updateUserInfo/1",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"UserService",
+								"updateUserInfo",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create-new-user",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/x-www-form-urlencoded"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "userName",
+									"value": "ikbals",
+									"type": "text"
+								},
+								{
+									"key": "userEmail",
+									"value": "ikbals",
+									"type": "text"
+								},
+								{
+									"key": "userPicture",
+									"value": "ikbals.png",
+									"type": "text"
+								},
+								{
+									"key": "userNumber",
+									"value": "ikbals",
+									"type": "text"
+								},
+								{
+									"key": "userAddress",
+									"value": "ikbals",
+									"type": "text"
+								},
+								{
+									"key": "userPassword",
+									"value": "ikbals",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}/UserService/createUser",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"UserService",
+								"createUser"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete-user",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost/00joki/rizki/api/userservice/UserService/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"00joki",
+								"rizki",
+								"api",
+								"userservice",
+								"UserService",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update-password-user",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/x-www-form-urlencoded",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "userPassword",
+									"value": "test",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}/UserService/updatePassword/1",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"UserService",
+								"updatePassword",
+								"1"
+							],
+							"query": [
+								{
+									"key": "",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "news-service",
+			"item": [
+				{
+					"name": "get-news-by-user",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "userId",
+								"value": "1",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/x-www-form-urlencoded",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "userName",
+									"value": "ussad",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}/NewsService/getNews/1",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"NewsService",
+								"getNews",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get-news-by-id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/NewsService/getNewsById/1",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"NewsService",
+								"getNewsById",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create-news",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/x-www-form-urlencoded"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "newsTitle",
+									"value": "tests",
+									"type": "text"
+								},
+								{
+									"key": "newsText",
+									"value": "ikbals",
+									"type": "text"
+								},
+								{
+									"key": "newsDate",
+									"value": "1999/02/22",
+									"type": "text"
+								},
+								{
+									"key": "newsStatus",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "userId",
+									"value": "1",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}/NewsService/createNews",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"NewsService",
+								"createNews"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update-news",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/x-www-form-urlencoded"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "newsTitle",
+									"value": "ikbals",
+									"type": "text"
+								},
+								{
+									"key": "newsText",
+									"value": "ikbals",
+									"type": "text"
+								},
+								{
+									"key": "newsDate",
+									"value": "1999/02/27",
+									"type": "text"
+								},
+								{
+									"key": "newsStatus",
+									"value": "2",
+									"type": "text"
+								},
+								{
+									"key": "userId",
+									"value": "1",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}/NewsService/updateNews/1",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"NewsService",
+								"updateNews",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete-news",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/NewsService/deleteNews/1",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"NewsService",
+								"deleteNews",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "contact-service",
+			"item": [
+				{
+					"name": "get-contact-by-user",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "userId",
+								"value": "1",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/x-www-form-urlencoded",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "userName",
+									"value": "ussad",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}/ContactService/getContact/1",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"ContactService",
+								"getContact",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get-contact-by-id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/ContactService/getContactById/1",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"ContactService",
+								"getContactById",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create-contact",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/x-www-form-urlencoded"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "contactAddress",
+									"value": "tests",
+									"type": "text"
+								},
+								{
+									"key": "contactDivision",
+									"value": "ikbals",
+									"type": "text"
+								},
+								{
+									"key": "contactName",
+									"value": "coba",
+									"type": "text"
+								},
+								{
+									"key": "contactNumber",
+									"value": "123",
+									"type": "text"
+								},
+								{
+									"key": "userId",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "contactEmail",
+									"value": "ikbal@ikbal.com",
+									"type": "text"
+								},
+								{
+									"key": "contactCompany",
+									"value": "ikbal corp",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}/ContactService/createContact",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"ContactService",
+								"createContact"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update-contact",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/x-www-form-urlencoded"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "contactAddress",
+									"value": "ikbal maulana",
+									"type": "text"
+								},
+								{
+									"key": "contactDivision",
+									"value": "ikbal maulana",
+									"type": "text"
+								},
+								{
+									"key": "contactName",
+									"value": "ikbal maulana",
+									"type": "text"
+								},
+								{
+									"key": "contactNumber",
+									"value": "123456",
+									"type": "text"
+								},
+								{
+									"key": "userId",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "contactEmail",
+									"value": "ikbal@ikbal.com",
+									"type": "text"
+								},
+								{
+									"key": "contactCompany",
+									"value": "ikbal maulana corp",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}/ContactService/updateContact/1",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"ContactService",
+								"updateContact",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete-contact",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/ContactService/deleteContact/1",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"ContactService",
+								"deleteContact",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "note-service",
+			"item": [
+				{
+					"name": "get-note-by-user",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "userId",
+								"value": "1",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/x-www-form-urlencoded",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "userName",
+									"value": "ussad",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}/NoteService/getNote/1",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"NoteService",
+								"getNote",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get-note-by-id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/NoteService/getNoteById/1",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"NoteService",
+								"getNoteById",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create-note",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/x-www-form-urlencoded"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "noteDate",
+									"value": "1999/08/08/08",
+									"type": "text"
+								},
+								{
+									"key": "noteTitle",
+									"value": "ikbals",
+									"type": "text"
+								},
+								{
+									"key": "noteContent",
+									"value": "cobaassss",
+									"type": "text"
+								},
+								{
+									"key": "userId",
+									"value": "1",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}/NoteService/createNote",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"NoteService",
+								"createNote"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update-note",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/x-www-form-urlencoded"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "noteDate",
+									"value": "1999/08/08",
+									"type": "text"
+								},
+								{
+									"key": "noteTitle",
+									"value": "ikbals",
+									"type": "text"
+								},
+								{
+									"key": "noteContent",
+									"value": "coba",
+									"type": "text"
+								},
+								{
+									"key": "userId",
+									"value": "2",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}/NoteService/updateNote/1",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"NoteService",
+								"updateNote",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete-note",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/NoteService/deleteNote/1",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"NoteService",
+								"deleteNote",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "reminder-service",
+			"item": [
+				{
+					"name": "get-reminder-by-user",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "userId",
+								"value": "1",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/x-www-form-urlencoded",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": []
+						},
+						"url": {
+							"raw": "{{url}}/ReminderService/getReminder/1",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"ReminderService",
+								"getReminder",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get-reminder-by-id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/ReminderService/getReminderById/3",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"ReminderService",
+								"getReminderById",
+								"3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get-reminder-by-schedule",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/ReminderService/getReminderBySchedule/1",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"ReminderService",
+								"getReminderBySchedule",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update-reminder",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/x-www-form-urlencoded"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "reminderDate",
+									"value": "2019/05/05",
+									"type": "text"
+								},
+								{
+									"key": "reminderContent",
+									"value": "tests",
+									"type": "text"
+								},
+								{
+									"key": "userId",
+									"value": "1",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}/ReminderService/updateReminder/3",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"ReminderService",
+								"updateReminder",
+								"3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create-reminder",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/x-www-form-urlencoded"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "reminderDate",
+									"value": "tests",
+									"type": "text"
+								},
+								{
+									"key": "reminderContent",
+									"value": "ikbals",
+									"type": "text"
+								},
+								{
+									"key": "userId",
+									"value": "1",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}/ReminderService/createReminder",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"ReminderService",
+								"createReminder"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete-reminder",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/ReminderService/deleteReminder/1",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"ReminderService",
+								"deleteReminder",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "schedule-service",
+			"item": [
+				{
+					"name": "get-schedule-by-user",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "userId",
+								"value": "1",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/x-www-form-urlencoded",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": []
+						},
+						"url": {
+							"raw": "{{url}}/ScheduleService/getSchedule/1",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"ScheduleService",
+								"getSchedule",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get-schedule-by-id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/ScheduleService/getScheduleById/1",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"ScheduleService",
+								"getScheduleById",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create-schedule",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/x-www-form-urlencoded"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "scheduleContent",
+									"value": "tests",
+									"type": "text"
+								},
+								{
+									"key": "scheduleDate",
+									"value": "2019/04/28",
+									"type": "text"
+								},
+								{
+									"key": "userId",
+									"value": "1",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}/ScheduleService/createSchedule",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"ScheduleService",
+								"createSchedule"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update-schedule",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/x-www-form-urlencoded"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "scheduleContent",
+									"value": "COBA TEST",
+									"type": "text"
+								},
+								{
+									"key": "scheduleDate",
+									"value": "2019/04/28",
+									"type": "text"
+								},
+								{
+									"key": "userId",
+									"value": "1",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}/ScheduleService/updateSchedule/1",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"ScheduleService",
+								"updateSchedule",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete-schedule",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/ScheduleService/deleteSchedule/1",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"ScheduleService",
+								"deleteSchedule",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
