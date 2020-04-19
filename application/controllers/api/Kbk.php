@@ -13,6 +13,11 @@ class Kbk extends REST_Controller
 	{
 		parent::__construct();
 		$this->load->model('Model_kbk', 'mk');
-    }
+	}
+	
+	public function index_get()
+	{
+		
+	}
     
 }

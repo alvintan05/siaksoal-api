@@ -7,7 +7,7 @@ class Model_dosen extends CI_Model {
 	// please use $table_number = table name 
 	private $table_jadwal = 'jadwal_kul';
 	private $table_matkul = 'matakuliah';
-	private $table_upload = 'pengajuan_soal';
+	private $table_soal = 'soal_uts_uas';
 
 
 
@@ -30,6 +30,19 @@ class Model_dosen extends CI_Model {
 			return $data->result_array();
 		}	
 	}
+	
+	public function getStatusList($nip = null)
+	{
+		if ($nip != null) {			
+			$this->db->select('*');			
+			$this->db->from($this->table_soal);
+			$this->db->join($this->table_jadwal, 'soal_uts_uas.uts_uas_kodejdwl = jadwal_kul.kodejdwl');
+			$this->db->where('jadwal_kul.staff_nip', $nip);
+
+			$data = $this->db->get();
+			return $data->result_array();
+		}
+	}
 
 	public function getUpload($kode = null)
 	{
@@ -41,11 +54,11 @@ class Model_dosen extends CI_Model {
 			$data = $this->db->get();
 			return $data->result_array();
 		}	
-	}
+	}	
 
-	public function insertSoal($kode = null, $data)
+	public function insertSoal($data)
 	{
-		$query = $this->db->insert($this->table_upload, $data);
+		$query = $this->db->insert($this->table_soal, $data);
 
 		if ($this->db->affected_rows() == 1) {
 			return true;
@@ -54,10 +67,22 @@ class Model_dosen extends CI_Model {
 		}
 	}
 
-	public function updateUser($kode = null, $data)
-	{
+	public function updateStatusSoal($kode = null, $data)
+	{	
+		$this->db->where('uts_uas_kodejdwl', $kode);
+		$query = $this->db->update($this->table_soal,$data);
+
+		if ($this->db->affected_rows() == 1) {
+			return true;
+		}else{
+			return false;
+		}
+	}
+
+	public function deleteUpload($kode = null)
+	{	
 		$this->db->where('kode_soal', $kode);
-		$query = $this->db->update($this->table_upload,$data);
+		$query = $this->db->delete($this->table_soal);
 
 		if ($this->db->affected_rows() == 1) {
 			return true;
