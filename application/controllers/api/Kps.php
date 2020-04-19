@@ -6,41 +6,45 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 require APPPATH . '/libraries/REST_Controller.php';
 use Restserver\Libraries\REST_Controller;
 
-class Kbk extends REST_Controller
+class Kps extends REST_Controller
 {
 	
 	public function __construct()
 	{
 		parent::__construct();
-		$this->load->model('Model_kbk', 'mk');
+		$this->load->model('Model_Kps', 'mkp');
 	}
 	
-	public function index_get()
-	{
-		// Masih bingung yang di pake id apa 
-		$nip = $this->get('nip');
-
-		// tabel masih rancu
-		$data = $this->mk->getJadwal($nip);	
+	public function search_get()
+	{   
+        $responseData = null;
+        // masih belum selesai
+		$search = array(			
+			'prodi' => $this->get('prodi'),
+			'tahun' => $this->get('tahun'),
+			'semester' => $this->get('semester'),
+			'genap_ganjil' => $this->get('genap_ganjil')		
+        );
+        
+		$data = $this->mkp->getSearch($search);
 
 		if($data) {
 			$responseCode = "200";
-			$responseDesc = "Success get jadwal";
+			$responseDesc = "Success get list";
 			$responseData = $data;
-			$response = resultJson( $responseCode, $responseDesc, $responseData);
-			$this->response($response, REST_Controller::HTTP_OK);
+			
 		} else {
 			$responseCode = "404";
-			$responseDesc = "jadwal not found";
-			
-			$response = resultJson( $responseCode, $responseDesc, $responseData);
-			$this->response($response, REST_Controller::HTTP_NOT_FOUND);
-		}	
+			$responseDesc = "list not found";					
+        }	
+        
+        $response = resultJson( $responseCode, $responseDesc, $responseData);
+		$this->response($response, REST_Controller::HTTP_OK);
 	}
 
 	public function detailsoal_get($kode)
 	{
-		$data = $this->mk->getDetail($kode);	
+		$data = $this->mkp->getDetail($kode);	
 		$responseData = null;
 
 		if($data) {
@@ -76,7 +80,7 @@ class Kbk extends REST_Controller
 			);
 		}
 
-		$result = $this->mk->updateApproval($kode, $upload);
+		$result = $this->mkp->updateApproval($kode, $upload);
 
 		if($result) {
 			$responseCode = "200";
