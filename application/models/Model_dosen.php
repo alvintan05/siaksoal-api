@@ -22,9 +22,9 @@ class Model_dosen extends CI_Model {
 	public function getJadwal($nip = null)
 	{
 		if ($nip != null) {
-			$this->db->where('staff_nip', $nip);
 			$this->db->select('*');
 			$this->db->from($this->table_jadwal);
+			$this->db->where('staff_nip', $nip);			
 
 			$data = $this->db->get();
 			return $data->result_array();
