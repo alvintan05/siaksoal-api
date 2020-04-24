@@ -5,10 +5,9 @@ class Model_dosen extends CI_Model {
 
 
 	// please use $table_number = table name 
-	private $table_jadwal = 'jadwal_kul';
-	private $table_matkul = 'matakuliah';
-	private $table_soal = 'soal_uts_uas';
-
+	private $table_jadwal = 'tik.jadwal_kul';
+	private $table_matkul = 'tik.matakuliah';
+	private $table_soal = 'tik.soal_uts_uas';
 
 
 	// for naming your function

@@ -5,9 +5,9 @@ class Model_kbk extends CI_Model {
 
 
 	// please use $table_number = table name 
-	private $table_soal = 'soal_uts_uas';
-	private $table_jadwal = 'jadwal_kul';
-	
+	private $table_soal = 'tik.soal_uts_uas';
+	private $table_jadwal = 'tik.jadwal_kul';
+	private $table_staff = 'tik.staff';
 
 	// for naming your function
 	// please use get for selecting data or getting data 
@@ -20,10 +20,10 @@ class Model_kbk extends CI_Model {
 	public function getDetail($kode = null)
 	{
 		if ($kode != null) {			
-			$this->db->select('*');						
+			$this->db->select('kode_soal, file, jenis_ujian, jenis_soal, nama');						
 			$this->db->from($this->table_soal);			
-			$this->db->join($this->table_jadwal, 'soal_uts_uas.uts_uas_kodejdwl = jadwal_kul.kodejdwl');
-			$this->db->where('kode_soal',$kode);
+			$this->db->join($this->table_staff, 'ON soal_uts_uas.dosen_nip = staff.nip');
+			$this->db->where('kbk_nip', $kode);
 
 			$data = $this->db->get();
 			return $data->result_array();
