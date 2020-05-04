@@ -20,10 +20,9 @@ class Kps extends REST_Controller
         $responseData = null;
         // masih belum selesai
 		$search = array(			
-			'prodi' => $this->get('prodi'),
 			'tahun' => $this->get('tahun'),
 			'semester' => $this->get('semester'),
-			'genap_ganjil' => $this->get('genap_ganjil')		
+			'jenisSoal'	=> $this->get('jenissoal')
         );
         
 		$data = $this->mkp->getSearch($search);
@@ -41,7 +40,6 @@ class Kps extends REST_Controller
         $response = resultJson( $responseCode, $responseDesc, $responseData);
 		$this->response($response, REST_Controller::HTTP_OK);
 	}
-
 	
     
 }
