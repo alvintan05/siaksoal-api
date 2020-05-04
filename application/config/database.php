@@ -75,16 +75,16 @@ $query_builder = TRUE;
 
 $db['default'] = array(
 	'dsn'	=> '',
-	// 'hostname' => 'localhost',
-	// 'username' => 'root',
-	// 'password' => '',
-	// 'database' => 'tik',
-	// 'dbdriver' => 'mysqli',
 	'hostname' => 'localhost',
-	'username' => 'openpg',
-	'password' => 'hahaha123',
-	'database' => 'TIK_DB',
-	'dbdriver' => 'postgre',	
+	'username' => 'root',
+	'password' => '',
+	'database' => 'tik',
+	'dbdriver' => 'mysqli',
+	// 'hostname' => 'localhost',
+	// 'username' => 'openpg',
+	// 'password' => 'hahaha123',
+	// 'database' => 'TIK_DB',
+	// 'dbdriver' => 'postgre',	
 	'dbprefix' => '',
 	'pconnect' => FALSE,
 	'db_debug' => (ENVIRONMENT !== 'production'),
@@ -98,5 +98,5 @@ $db['default'] = array(
 	'stricton' => FALSE,
 	'failover' => array(),
 	'save_queries' => TRUE,
-	'port'	=> 5432
+	// 'port'	=> 5432
 );

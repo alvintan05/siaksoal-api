@@ -84,13 +84,16 @@ class Dosen extends REST_Controller
 		 * Rubah file di database menjadi blob
 		 * Belum bisa upload file
 		 */
-		$upload = array(			
+		$upload = array(		
 			'file' => $this->post('file'),
 			'jenis_ujian' => $this->post('jenis_ujian'),
 			'jenis_soal' => $this->post('jenis_soal'),
 			'status' => $this->post('status'),
 			'note' => $this->post('note'),
-			'uts_uas_kodejdwl' => $this->post('uts_uas_kodejdwl')
+			'create_at' => date('y-m-d'),
+			'update_at' => date('y-m-d'),
+			'uts_uas_kodejdwl' => $this->post('uts_uas_kodejdwl'),
+			'kbk_nip' => $this->post('kbk_nip')
 		);
 
 		$query = $this->md->insertSoal($upload);
@@ -109,11 +112,32 @@ class Dosen extends REST_Controller
 		$this->response($response, REST_Controller::HTTP_OK);
 	}
 
-	public function daftarstatus_get()
+	public function daftarstatusuts_get()
 	{	
 		$nip = $this->get('nip');
 
-		$data = $this->md->getStatusList($nip);	
+		$data = $this->md->getStatusListUts($nip);	
+
+		if($data) {
+			$responseCode = "200";
+			$responseDesc = "Success get list status soal";
+			$responseData = $data;
+			$response = resultJson( $responseCode, $responseDesc, $responseData);
+			$this->response($response, REST_Controller::HTTP_OK);
+		} else {
+			$responseCode = "404";
+			$responseDesc = "list status soal not found";
+			$responseData = $data;
+			$response = resultJson( $responseCode, $responseDesc, $responseData);
+			$this->response($response, REST_Controller::HTTP_NOT_FOUND);
+		}	
+	}
+
+	public function daftarstatusuas_get()
+	{	
+		$nip = $this->get('nip');
+
+		$data = $this->md->getStatusListUas($nip);	
 
 		if($data) {
 			$responseCode = "200";
@@ -131,6 +155,7 @@ class Dosen extends REST_Controller
 	}
 
 	// update edit upload soal
+	// nunggu tampilan edit dulu
 	public function editupload_put()
 	{
 		$kode = $this->put('kode');

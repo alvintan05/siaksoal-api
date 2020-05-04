@@ -7,6 +7,7 @@ class Model_dosen extends CI_Model {
 	// please use $table_number = table name 
 	private $table_jadwal = 'tik.jadwal_kul';
 	private $table_matkul = 'tik.matakuliah';
+	private $table_kelas = 'tik.kelas';
 	private $table_soal = 'tik.soal_uts_uas';
 
 
@@ -20,23 +21,54 @@ class Model_dosen extends CI_Model {
 
 	public function getJadwal($nip = null)
 	{
-		if ($nip != null) {
-			$this->db->select('*');
-			$this->db->from($this->table_jadwal);
-			$this->db->where('staff_nip', $nip);			
+		if ($nip != null) {			
+			$init_table_jadwal = $this->table_jadwal.' j';
+			$init_table_matkul = $this->table_matkul.' m';
+			$init_table_kelas = $this->table_kelas.' k';
 
+			$this->db->select('j.kodejdwl, j.matakuliah_kodemk, m.namamk, k.namaklas, j.ruangan_namaruang');			
+			$this->db->from($init_table_jadwal);
+			$this->db->join($init_table_matkul, 'j.matakuliah_kodemk = m.kodemk');
+			$this->db->join($init_table_kelas, 'j.kelas_kodeklas = k.kodeklas');
+			$this->db->where('j.staff_nip', $nip);
+	
 			$data = $this->db->get();
 			return $data->result_array();
 		}	
 	}
 	
-	public function getStatusList($nip = null)
+	public function getStatusListUts($nip = null)
 	{
 		if ($nip != null) {			
-			$this->db->select('*');			
-			$this->db->from($this->table_soal);
-			$this->db->join($this->table_jadwal, 'soal_uts_uas.uts_uas_kodejdwl = jadwal_kul.kodejdwl');
-			$this->db->where('jadwal_kul.staff_nip', $nip);
+			$init_table_soal = $this->table_soal.' s';
+			$init_table_jadwal = $this->table_jadwal.' j';
+			$init_table_matkul = $this->table_matkul.' m';			
+			$array = array('j.staff_nip' => $nip, 's.jenis_ujian' => 'UTS');
+
+			$this->db->select('s.kode_soal, j.matakuliah_kodemk, m.namamk, s.file, s.status, s.create_at, s.jenis_ujian');	
+			$this->db->from($init_table_soal);
+			$this->db->join($init_table_jadwal, 's.uts_uas_kodejdwl = j.kodejdwl');
+			$this->db->join($init_table_matkul, 'j.matakuliah_kodemk = m.kodemk');
+			$this->db->where($array);
+
+			$data = $this->db->get();
+			return $data->result_array();
+		}
+	}
+
+	public function getStatusListUas($nip = null)
+	{
+		if ($nip != null) {			
+			$init_table_soal = $this->table_soal.' s';
+			$init_table_jadwal = $this->table_jadwal.' j';
+			$init_table_matkul = $this->table_matkul.' m';			
+			$array = array('j.staff_nip' => $nip, 's.jenis_ujian' => 'UAS');
+
+			$this->db->select('s.kode_soal, j.matakuliah_kodemk, m.namamk, s.file, s.status, s.create_at, s.jenis_ujian');
+			$this->db->from($init_table_soal);
+			$this->db->join($init_table_jadwal, 's.uts_uas_kodejdwl = j.kodejdwl');
+			$this->db->join($init_table_matkul, 'j.matakuliah_kodemk = m.kodemk');
+			$this->db->where($array);
 
 			$data = $this->db->get();
 			return $data->result_array();
@@ -44,11 +76,17 @@ class Model_dosen extends CI_Model {
 	}
 
 	public function getUpload($kode = null)
-	{
-		if ($kode != null) {
-			$this->db->where('kodemk', $kode);
-			$this->db->select('*');
-			$this->db->from($this->table_matkul);
+	{	
+		if ($kode != null) {			
+			$init_table_jadwal = $this->table_jadwal.' j';
+			$init_table_matkul = $this->table_matkul.' m';
+			$init_table_kelas = $this->table_kelas.' k';
+
+			$this->db->select('j.kodejdwl, m.namamk, k.namaklas');			
+			$this->db->from($init_table_jadwal);
+			$this->db->join($init_table_matkul, 'j.matakuliah_kodemk = m.kodemk');
+			$this->db->join($init_table_kelas, 'j.kelas_kodeklas = k.kodeklas');
+			$this->db->where('j.kodejdwl', $kode);
 
 			$data = $this->db->get();
 			return $data->result_array();
