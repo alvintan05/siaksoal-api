@@ -17,26 +17,20 @@ class Model_kps extends CI_Model {
 	// format camelCase
 	// for the result, this is a simple request you can improve by your self to make a any response
 
-	// belum selesai
-	
-	public function getSearch($search = null)
+    // belum selesai
+	public function getSearch($search= null)
 	{
-		if ($search)
-		{		
-			$this->db->select('s.kode_soal, mk.namamk, s.file, s.jenis_soal, mk.semesterke, dsn.nama as "dosen pembuat"');						
-			$this->db->from('soal_uts_uas s');			
-			$this->db->join('jadwal_kul jk', 's.uts_uas_kodejdwl = jk.kodejdwl');
-			$this->db->join('matakuliah mk','jk.matakuliah_kodemk = mk.kodemk');
-			$this->db->join('thn_akad ta', 'jk.thn_akad_thn_akad_id = ta.thn_akad_id');
-			$this->db->join('staff dsn', 'jk.staff_nip = dsn.nip');
-			$this->db->where('ta.tahun_akad', $search['tahun']);
-			$this->db->where('mk.semesterke', $search['semester']);
-			$this->db->where('s.jenis_ujian', $search['jenisSoal']);
+		if ($search != null) {			
+			$this->db->select('*');						
+			$this->db->from($this->table_soal);			
+			$this->db->join($this->table_jadwal, 'soal_uts_uas.uts_uas_kodejdwl = jadwal_kul.kodejdwl');
+			$this->db->where('kode_soal',$search);
 
 			$data = $this->db->get();
 			return $data->result_array();
 		}
 	}	
+	
 
 }
 
