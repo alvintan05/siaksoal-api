@@ -5,10 +5,11 @@ class Model_panitia extends CI_Model {
 
 
 	// please use $table_number = table name 
+	private $table_soal = 'tik.soal_uts_uas';
+	private $table_jadwal = 'tik.jadwal_kul';
+	private $table_matkul = 'tik.matakuliah';
+
 	
-
-
-
 	// for naming your function
 	// please use get for selecting data or getting data 
 	// please use insert for selecting data or inserting new data 
@@ -17,6 +18,22 @@ class Model_panitia extends CI_Model {
 	// format camelCase
 	// for the result, this is a simple request you can improve by your self to make a any response
 	
+	public function getSoal()
+	{	
+		$init_table_soal = $this->table_soal.' s';
+		$init_table_jadwal = $this->table_jadwal.' j';
+		$init_table_matkul = $this->table_matkul.' m';
+
+		$this->db->select('s.kode_soal, m.namamk, dsn.nama as "dosen pembuat", s.jenis_soal, s.file, m.semesterke');						
+		$this->db->from($init_table_soal);			
+		$this->db->join($init_table_jadwal, 's.uts_uas_kodejdwl = j.kodejdwl');
+		$this->db->join($init_table_matkul,'j.matakuliah_kodemk = m.kodemk');
+		$this->db->join('staff dsn', 'j.staff_nip = dsn.nip');
+		$this->db->where('s.status = "approved"');
+
+		$data = $this->db->get();
+		return $data->result_array();
+	}	
 
 }
 
