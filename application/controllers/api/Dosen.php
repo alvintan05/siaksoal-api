@@ -88,7 +88,7 @@ class Dosen extends REST_Controller
 			'file' => $this->post('file'),
 			'jenis_ujian' => $this->post('jenis_ujian'),
 			'jenis_soal' => $this->post('jenis_soal'),
-			'status' => $this->post('status'),
+			'status' => 'Processing',
 			'note' => $this->post('note'),
 			'create_at' => date('y-m-d'),
 			'update_at' => date('y-m-d'),
