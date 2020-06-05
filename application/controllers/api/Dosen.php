@@ -13,6 +13,7 @@ class Dosen extends REST_Controller
 	{
 		parent::__construct();
 		$this->load->model('Model_dosen', 'md');
+		$this->load->library('upload');	
 	}
 
 	public function index_get()
@@ -71,21 +72,28 @@ class Dosen extends REST_Controller
 			$responseData = $data;
 			$response = resultJson( $responseCode, $responseDesc, $responseData);
 			$this->response($response, REST_Controller::HTTP_NOT_FOUND);
-		}	
-		
+		}			
 	}
 
 	// Insert upload soal
 	public function upload_post()
 	{
-		$responseData = null;
-		/**
-		 * TO DO 
-		 * Rubah file di database menjadi blob
-		 * Belum bisa upload file
-		 */
+		$responseData = null;	
+
+		$config = array(
+			'upload_path'=>'uploads/soal/',
+			'allowed_types'=>'doc|docx|pdf'			
+		);
+
+		$this->upload->initialize($config);
+	
+		$this->upload->do_upload('file');		
+
+		$data_upload = $this->upload->data();
+		$filename = $data_upload['file_name'];
+
 		$upload = array(		
-			'file' => $this->post('file'),
+			'file' => $filename,
 			'jenis_ujian' => $this->post('jenis_ujian'),
 			'jenis_soal' => $this->post('jenis_soal'),
 			'status' => 'Processing',
@@ -110,6 +118,8 @@ class Dosen extends REST_Controller
 		$response = resultJson( $responseCode, $responseDesc, $responseData);
 
 		$this->response($response, REST_Controller::HTTP_OK);
+			
+		
 	}
 
 	public function daftarstatusuts_get()
