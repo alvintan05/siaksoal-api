@@ -78,30 +78,34 @@ class Dosen extends REST_Controller
 	// Insert upload soal
 	public function upload_post()
 	{
-		$responseData = null;	
+		$responseData = null;
+		$kbk_nip = 0;
 
-		$config = array(
-			'upload_path'=>'uploads/soal/',
-			'allowed_types'=>'doc|docx|pdf'			
-		);
-
-		$this->upload->initialize($config);
-	
-		$this->upload->do_upload('file');		
-
-		$data_upload = $this->upload->data();
-		$filename = $data_upload['file_name'];
+		switch ($this->post('kbk_nip')) {
+			case 'kbkTI':
+				# change later per nip kbk
+				$kbk_nip = 11111;
+				break;
+			case 'kbkTMD':
+				$kbk_nip = 11111;
+				break;
+			case 'kbkTMJ':
+				$kbk_nip = 99999;
+				break;
+			case 'kbkCB':
+				$kbk_nip = 11111;
+				break;					
+		}
 
 		$upload = array(		
-			'file' => $filename,
+			'file' => $this->post('file'),
 			'jenis_ujian' => $this->post('jenis_ujian'),
 			'jenis_soal' => $this->post('jenis_soal'),
-			'status' => 'Processing',
-			'note' => $this->post('note'),
+			'status' => 'Processing',			
 			'create_at' => date('y-m-d'),
 			'update_at' => date('y-m-d'),
 			'uts_uas_kodejdwl' => $this->post('uts_uas_kodejdwl'),
-			'kbk_nip' => $this->post('kbk_nip')
+			'kbk_nip' => $kbk_nip;
 		);
 
 		$query = $this->md->insertSoal($upload);
