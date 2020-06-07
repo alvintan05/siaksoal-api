@@ -105,7 +105,7 @@ class Dosen extends REST_Controller
 			'create_at' => date('y-m-d'),
 			'update_at' => date('y-m-d'),
 			'uts_uas_kodejdwl' => $this->post('uts_uas_kodejdwl'),
-			'kbk_nip' => $kbk_nip;
+			'kbk_nip' => $kbk_nip
 		);
 
 		$query = $this->md->insertSoal($upload);
