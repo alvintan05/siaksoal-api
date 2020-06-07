@@ -64,7 +64,7 @@ class Model_dosen extends CI_Model {
 			$init_table_matkul = $this->table_matkul.' m';			
 			$array = array('j.staff_nip' => $nip, 's.jenis_ujian' => 'UAS');
 
-			$this->db->select('s.kode_soal, j.matakuliah_kodemk, m.namamk, s.file, s.status, s.create_at, s.jenis_ujian');
+			$this->db->select('s.kode_soal, j.matakuliah_kodemk, m.namamk, s.file, s.status, s.create_at, s.jenis_soal');
 			$this->db->from($init_table_soal);
 			$this->db->join($init_table_jadwal, 's.uts_uas_kodejdwl = j.kodejdwl');
 			$this->db->join($init_table_matkul, 'j.matakuliah_kodemk = m.kodemk');
