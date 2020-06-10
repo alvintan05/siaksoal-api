@@ -9,7 +9,7 @@ class Model_dosen extends CI_Model {
 	private $table_matkul = 'tik.matakuliah';
 	private $table_kelas = 'tik.kelas';
 	private $table_soal = 'tik.soal_uts_uas';
-
+	private $table_pengurus = 'tik.pengurus_uts_uas';
 
 	// for naming your function
 	// please use get for selecting data or getting data 
@@ -104,9 +104,31 @@ class Model_dosen extends CI_Model {
 		}
 	}
 
-	public function updateStatusSoal($kode = null, $data)
+	public function getEdit($kode = null)
 	{	
-		$this->db->where('uts_uas_kodejdwl', $kode);
+		if ($kode != null) {			
+			$init_table_jadwal = $this->table_jadwal.' j';
+			$init_table_matkul = $this->table_matkul.' m';
+			$init_table_kelas = $this->table_kelas.' k';
+			$init_table_soal = $this->table_soal.' s';
+			$init_table_pengurus = $this->table_pengurus.' p';
+
+			$this->db->select('s.kode_soal, m.namamk, k.namaklas, s.jenis_ujian, s.jenis_soal, s.file, p.bagian');		
+			$this->db->from($init_table_soal);
+			$this->db->join($init_table_jadwal, 's.uts_uas_kodejdwl = j.kodejdwl');
+			$this->db->join($init_table_matkul, 'j.matakuliah_kodemk = m.kodemk');
+			$this->db->join($init_table_kelas, 'j.kelas_kodeklas = k.kodeklas');
+			$this->db->join($init_table_pengurus, 's.kbk_nip = p.pengurus_uts_uas_nip');
+			$this->db->where('s.kode_soal', $kode);
+
+			$data = $this->db->get();			
+			return $data->result_array();
+		}	
+	}	
+
+	public function updateEditSoal($kode = null, $data)
+	{	
+		$this->db->where('kode_soal', $kode);
 		$query = $this->db->update($this->table_soal,$data);
 
 		if ($this->db->affected_rows() == 1) {

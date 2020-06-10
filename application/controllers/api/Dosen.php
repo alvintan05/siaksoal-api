@@ -168,19 +168,48 @@ class Dosen extends REST_Controller
 		}	
 	}
 
-	// update edit upload soal
-	// nunggu tampilan edit dulu
-	public function editupload_put()
+	// Detail data di halaman edit
+	public function editupload_get()
 	{
+		$kode = $this->get('kode');
+
+		if($kode == null) {
+			$responseCode = "403";
+			$responseDesc = "Must have kode matkul!";			
+			$data = null;
+			$response = resultJson( $responseCode, $responseDesc, $data);
+			$this->response($response, REST_Controller::HTTP_FORBIDDEN);
+		} else {
+			$data = $this->md->getEdit($kode);
+		}		
+
+		if($data) {
+			$responseCode = "200";
+			$responseDesc = "Success get mata kuliah";
+			$responseData = $data;
+			$response = resultJson( $responseCode, $responseDesc, $responseData);
+			$this->response($response, REST_Controller::HTTP_OK);
+		} else {
+			$responseCode = "404";
+			$responseDesc = "mata kuliah not found";
+			$responseData = $data;
+			$response = resultJson( $responseCode, $responseDesc, $responseData);
+			$this->response($response, REST_Controller::HTTP_NOT_FOUND);
+		}			
+	}
+	
+	public function editupload_put()
+	{			
 		$kode = $this->put('kode');
 		$responseData = null;
 		$upload = array(			
-			'file' => $this->put('file'),			
-			'jenis_ujian' => $this->put('jenis_ujian'),			
-			'note' => $this->put('note')
+			'file' => $this->put('file'),	
+			'jenis_ujian' => $this->put('jenis_ujian'),	
+			'jenis_soal' => $this->put('jenis_soal'),			
+			'update_at'	=> date('y-m-d')
 		);
 
-		$query = $this->md->updateStatusSoal($kode,$upload);
+		$query = $this->md->updateEditSoal($kode,$upload);
 
 		if ($query) {
 			$responseCode = "200";
