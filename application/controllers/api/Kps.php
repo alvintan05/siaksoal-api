@@ -15,14 +15,14 @@ class Kps extends REST_Controller
 		$this->load->model('Model_kps', 'mkp');
 	}
 	
-	public function search_get()
+	public function search_post()
 	{   
         $responseData = null;
         // masih belum selesai
 		$search = array(			
-			'tahun' => $this->get('tahun'),
-			'semester' => $this->get('semester'),
-			'jenisSoal'	=> $this->get('jenissoal')
+			'tahun' => $this->input->post('tahun'),
+			'semester' => $this->input->post('semester'),
+			'jenisSoal'	=> $this->input->post('jenissoal')
         );
         
 		$data = $this->mkp->getSearch($search);
