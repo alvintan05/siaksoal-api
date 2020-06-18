@@ -28,7 +28,7 @@ class Model_kps extends CI_Model {
 			$init_table_jadwal = $this->table_jadwal.' j';
 			$init_table_matkul = $this->table_matkul.' m';
 
-			$this->db->select('s.kode_soal, m.namamk, s.file, s.jenis_soal, m.semesterke, dsn.nama as "dosen pembuat"');						
+			$this->db->select('s.kode_soal, m.namamk, s.file, s.jenis_soal, m.semesterke, dsn.nama as "dosen_pembuat"');						
 			$this->db->from($init_table_soal);			
 			$this->db->join($init_table_jadwal, 's.uts_uas_kodejdwl = j.kodejdwl');
 			$this->db->join($init_table_matkul,'j.matakuliah_kodemk = m.kodemk');

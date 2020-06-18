@@ -34,7 +34,7 @@ class Kps extends REST_Controller
 			
 		} else {
 			$responseCode = "404";
-			$responseDesc = "list not found";					
+			$responseDesc = "list not found";		
         }	
         
         $response = resultJson( $responseCode, $responseDesc, $responseData);
