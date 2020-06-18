@@ -8,6 +8,7 @@ class Model_panitia extends CI_Model {
 	private $table_soal = 'tik.soal_uts_uas';
 	private $table_jadwal = 'tik.jadwal_kul';
 	private $table_matkul = 'tik.matakuliah';
+	private $table_batas = 'tik.batas_waktu';
 
 	
 	// for naming your function
@@ -34,6 +35,25 @@ class Model_panitia extends CI_Model {
 		$data = $this->db->get();
 		return $data->result_array();
 	}	
+
+	public function getBatasWaktu()
+	{				
+		$this->db->from($this->table_batas);							
+		$data = $this->db->get();
+		return $data->result_array();
+	}	
+
+	public function updateBatasWaktu($upload, $jenis)
+	{
+		$this->db->where('jenis_ujian', $jenis);
+		$query = $this->db->update($this->table_batas,$upload);
+
+		if ($this->db->affected_rows() == 1) {
+			return true;
+		}else{
+			return false;
+		}
+	}
 
 }
 
