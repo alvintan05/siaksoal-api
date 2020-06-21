@@ -45,6 +45,58 @@ class Dosen extends REST_Controller
 		}	
 	}
 
+	// Daftar tahun akademik
+	public function tahun_get()
+	{
+		$data = $this->md->getTahun();
+
+		if($data) {
+			$responseCode = "200";
+			$responseDesc = "Success get tahun";
+			$responseData = $data;
+			$response = resultJson( $responseCode, $responseDesc, $responseData);
+			$this->response($response, REST_Controller::HTTP_OK);
+		} else {
+			$responseCode = "404";
+			$responseDesc = "tahun not found";
+			$responseData = $data;
+			$response = resultJson( $responseCode, $responseDesc, $responseData);
+			$this->response($response, REST_Controller::HTTP_NOT_FOUND);
+		}	
+	}
+
+	// Dapatkan jadwal berdasarkan tahun dan semester
+	public function jadwal_by_get()
+	{
+		$nip = $this->get('nip');
+		$tahun = $this->get('tahun');
+		$semester = $this->get('semester');
+
+		if($nip == null && $tahun == null && $semester == null) {
+			$responseCode = "403";
+			$responseDesc = "Lengkapi Parameter!";			
+			$data = null;
+			$response = resultJson( $responseCode, $responseDesc, $data);
+			$this->response($response, REST_Controller::HTTP_FORBIDDEN);
+		} else {
+			$data = $this->md->getJadwalByTahun($nip, $tahun, $semester);
+		}		
+
+		if($data) {
+			$responseCode = "200";
+			$responseDesc = "Success get jadwal";
+			$responseData = $data;
+			$response = resultJson( $responseCode, $responseDesc, $responseData);
+			$this->response($response, REST_Controller::HTTP_OK);
+		} else {
+			$responseCode = "404";
+			$responseDesc = "jadwal not found";
+			$responseData = $data;
+			$response = resultJson( $responseCode, $responseDesc, $responseData);
+			$this->response($response, REST_Controller::HTTP_NOT_FOUND);
+		}	
+	}
+
 	// Detail data di halaman upload
 	public function upload_get()
 	{

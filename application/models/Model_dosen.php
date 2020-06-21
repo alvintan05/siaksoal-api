@@ -10,6 +10,7 @@ class Model_dosen extends CI_Model {
 	private $table_kelas = 'tik.kelas';
 	private $table_soal = 'tik.soal_uts_uas';
 	private $table_pengurus = 'tik.pengurus_uts_uas';
+	private $table_tahun = 'tik.thn_akad';
 
 	// for naming your function
 	// please use get for selecting data or getting data 
@@ -35,6 +36,28 @@ class Model_dosen extends CI_Model {
 			$data = $this->db->get();
 			return $data->result_array();
 		}	
+	}
+
+	public function getJadwalByTahun($nip, $tahun, $semester)
+	{
+		$init_table_jadwal = $this->table_jadwal.' j';
+		$init_table_matkul = $this->table_matkul.' m';
+		$init_table_kelas = $this->table_kelas.' k';
+		$init_table_tahun = $this->table_tahun.' t';
+
+		$this->db->select('j.kodejdwl, j.matakuliah_kodemk, m.namamk, k.namaklas, j.ruangan_namaruang');			
+		$this->db->from($init_table_jadwal);
+		$this->db->join($init_table_matkul, 'j.matakuliah_kodemk = m.kodemk');
+		$this->db->join($init_table_kelas, 'j.kelas_kodeklas = k.kodeklas');
+		$this->db->join($init_table_tahun, 'j.thn_akad_thn_akad_id = t.thn_akad_id');		
+		$this->db->where(array(
+			'j.staff_nip' => $nip,
+			't.tahun_akad' => $tahun,
+			't.semester' => $semester
+		));
+
+		$data = $this->db->get();
+		return $data->result_array();
 	}
 	
 	public function getStatusListUts($nip = null)
@@ -150,8 +173,14 @@ class Model_dosen extends CI_Model {
 		}
 	}
 
-	
-
+	public function getTahun()
+	{
+		$this->db->select('tahun_akad');
+		$this->db->from($this->table_tahun);
+		$this->db->distinct();
+		$data = $this->db->get();
+		return $data->result_array();
+	}
 }
 
 /* End of file Model_dosen.php */
