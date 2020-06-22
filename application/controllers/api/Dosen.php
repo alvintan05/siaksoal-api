@@ -134,18 +134,17 @@ class Dosen extends REST_Controller
 		$kbk_nip = 0;
 
 		switch ($this->post('kbk_nip')) {
-			case 'kbkTI':
-				# change later per nip kbk
+			case 'kbkRPL':				
 				$kbk_nip = 11111;
 				break;
-			case 'kbkTMD':
-				$kbk_nip = 11111;
-				break;
-			case 'kbkTMJ':
+			case 'kbkMultimedia':
 				$kbk_nip = 99999;
 				break;
 			case 'kbkCB':
-				$kbk_nip = 11111;
+				$kbk_nip = 64739;
+				break;
+			case 'kbkJE':
+				$kbk_nip = 74839;
 				break;					
 		}
 
@@ -254,12 +253,41 @@ class Dosen extends REST_Controller
 	{			
 		$kode = $this->put('kode');
 		$responseData = null;
-		$upload = array(			
-			'file' => $this->put('file'),	
-			'jenis_ujian' => $this->put('jenis_ujian'),	
-			'jenis_soal' => $this->put('jenis_soal'),			
-			'update_at'	=> date('y-m-d')
-		);
+
+		$kbk_nip = 0;
+
+		switch ($this->put('kbk_nip')) {
+			case 'kbkRPL':				
+				$kbk_nip = 11111;
+				break;
+			case 'kbkMultimedia':
+				$kbk_nip = 99999;
+				break;
+			case 'kbkCB':
+				$kbk_nip = 64739;
+				break;
+			case 'kbkJE':
+				$kbk_nip = 74839;
+				break;					
+		}
+
+		$upload = array();
+		if($this->put('file') == NULL){
+			$upload = array(							
+				'jenis_ujian' => $this->put('jenis_ujian'),	
+				'jenis_soal' => $this->put('jenis_soal'),
+				'kbk_nip' => $kbk_nip,
+				'update_at'	=> date('y-m-d')
+			);
+		} else {
+			$upload = array(			
+				'file' => $this->put('file'),	
+				'jenis_ujian' => $this->put('jenis_ujian'),	
+				'jenis_soal' => $this->put('jenis_soal'),
+				'kbk_nip' => $kbk_nip,
+				'update_at'	=> date('y-m-d')
+			);
+		}		
 
 		$query = $this->md->updateEditSoal($kode,$upload);
 

@@ -65,13 +65,18 @@ class Model_dosen extends CI_Model {
 		if ($nip != null) {			
 			$init_table_soal = $this->table_soal.' s';
 			$init_table_jadwal = $this->table_jadwal.' j';
-			$init_table_matkul = $this->table_matkul.' m';			
-			$array = array('j.staff_nip' => $nip, 's.jenis_ujian' => 'UTS');
+			$init_table_matkul = $this->table_matkul.' m';		
+			$init_table_pengurus = $this->table_pengurus.' p';
+			$array = array(
+				'j.staff_nip' => $nip, 
+				's.jenis_ujian' => 'UTS'
+			);
 
-			$this->db->select('s.kode_soal, j.matakuliah_kodemk, m.namamk, s.file, s.status,s.jenis_soal, s.create_at, s.update_at');	
+			$this->db->select('s.kode_soal, j.matakuliah_kodemk, m.namamk, s.file, s.status, s.jenis_soal, p.bagian, s.note,s.create_at, s.update_at');	
 			$this->db->from($init_table_soal);
 			$this->db->join($init_table_jadwal, 's.uts_uas_kodejdwl = j.kodejdwl');
 			$this->db->join($init_table_matkul, 'j.matakuliah_kodemk = m.kodemk');
+			$this->db->join($init_table_pengurus, 's.kbk_nip = p.pengurus_uts_uas_nip');
 			$this->db->where($array);
 
 			$data = $this->db->get();
@@ -85,12 +90,14 @@ class Model_dosen extends CI_Model {
 			$init_table_soal = $this->table_soal.' s';
 			$init_table_jadwal = $this->table_jadwal.' j';
 			$init_table_matkul = $this->table_matkul.' m';			
+			$init_table_pengurus = $this->table_pengurus.' p';
 			$array = array('j.staff_nip' => $nip, 's.jenis_ujian' => 'UAS');
 
-			$this->db->select('s.kode_soal, j.matakuliah_kodemk, m.namamk, s.file, s.status, s.jenis_soal, s.create_at, s.update_at');
+			$this->db->select('s.kode_soal, j.matakuliah_kodemk, m.namamk, s.file, s.status, s.jenis_soal, p.bagian, s.note, s.create_at, s.update_at');
 			$this->db->from($init_table_soal);
 			$this->db->join($init_table_jadwal, 's.uts_uas_kodejdwl = j.kodejdwl');
 			$this->db->join($init_table_matkul, 'j.matakuliah_kodemk = m.kodemk');
+			$this->db->join($init_table_pengurus, 's.kbk_nip = p.pengurus_uts_uas_nip');
 			$this->db->where($array);
 
 			$data = $this->db->get();
