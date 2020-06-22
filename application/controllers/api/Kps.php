@@ -22,7 +22,8 @@ class Kps extends REST_Controller
 		$search = array(			
 			'tahun' => $this->get('tahun'),
 			'semester' => $this->get('semester'),
-			'jenisSoal'	=> $this->get('jenissoal')
+			'jenisSoal'	=> $this->get('jenissoal'),
+			'namaProdi' => $this->get('namaprodi')
         );
         
 		$data = $this->mkp->getSearch($search);
