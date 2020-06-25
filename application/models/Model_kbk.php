@@ -10,6 +10,9 @@ class Model_kbk extends CI_Model {
 	private $table_matkul = 'tik.matakuliah';
 	private $table_kelas = 'tik.kelas';
 	private $table_staff = 'tik.staff';
+	private $table_prodi = 'tik.prodi';
+	private $table_tahun = 'tik.tahun';
+
 
 	// for naming your function
 	// please use get for selecting data or getting data 
