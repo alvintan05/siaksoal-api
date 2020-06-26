@@ -11,7 +11,7 @@ class Model_kbk extends CI_Model {
 	private $table_kelas = 'tik.kelas';
 	private $table_staff = 'tik.staff';
 	private $table_prodi = 'tik.prodi';
-	private $table_tahun = 'tik.tahun';
+	private $table_tahun = 'tik.thn_akad';
 
 
 	// for naming your function
