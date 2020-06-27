@@ -152,7 +152,7 @@ class Dosen extends REST_Controller
 			'file' => $this->post('file'),
 			'jenis_ujian' => $this->post('jenis_ujian'),
 			'jenis_soal' => $this->post('jenis_soal'),
-			'status' => 'Processing',			
+			'status' => 'Proses',			
 			'create_at' => date('y-m-d'),
 			'update_at' => date('y-m-d'),
 			'uts_uas_kodejdwl' => $this->post('uts_uas_kodejdwl'),
@@ -177,43 +177,68 @@ class Dosen extends REST_Controller
 		
 	}
 
-	public function daftarstatusuts_get()
+	public function daftar_status_soal_get()
 	{	
 		$nip = $this->get('nip');
 
-		$data = $this->md->getStatusListUts($nip);	
+		$data_uts = $this->md->getStatusListUts($nip);
+		$data_uas = $this->md->getStatusListUas($nip);	
 
-		if($data) {
+		if($data_uts || $data_uas) {			
 			$responseCode = "200";
 			$responseDesc = "Success get list status soal";
-			$responseData = $data;
+			$responseData = array(
+				'data_uts' => $data_uts,
+				'data_uas' => $data_uas
+			);
 			$response = resultJson( $responseCode, $responseDesc, $responseData);
 			$this->response($response, REST_Controller::HTTP_OK);
 		} else {
 			$responseCode = "404";
 			$responseDesc = "list status soal not found";
-			$responseData = $data;
+			$responseData = array(
+				'data_uts' => $data_uts,
+				'data_uas' => $data_uas
+			);
 			$response = resultJson( $responseCode, $responseDesc, $responseData);
 			$this->response($response, REST_Controller::HTTP_NOT_FOUND);
 		}	
 	}
 
-	public function daftarstatusuas_get()
-	{	
+	// Dapatkan daftar status soal berdasarkan tahun dan semester
+	public function status_soal_by_get()
+	{
 		$nip = $this->get('nip');
+		$tahun = $this->get('tahun');
+		$semester = $this->get('semester');
 
-		$data = $this->md->getStatusListUas($nip);	
+		if($nip == null && $tahun == null && $semester == null) {
+			$responseCode = "403";
+			$responseDesc = "Lengkapi Parameter!";			
+			$data = null;
+			$response = resultJson( $responseCode, $responseDesc, $data);
+			$this->response($response, REST_Controller::HTTP_FORBIDDEN);
+		} else {
+			$data_uts = $this->md->getStatusSoalUtsByTahun($nip, $tahun, $semester);
+			$data_uas = $this->md->getStatusSoalUasByTahun($nip, $tahun, $semester);
+		}		
 
-		if($data) {
+		if($data_uts || $data_uas) {
 			$responseCode = "200";
-			$responseDesc = "Success get list status soal";
-			$responseData = $data;
+			$responseDesc = "Success get jadwal";
+			$responseData = array(
+				'data_uts' => $data_uts,
+				'data_uas' => $data_uas
+			);
 			$response = resultJson( $responseCode, $responseDesc, $responseData);
 			$this->response($response, REST_Controller::HTTP_OK);
 		} else {
 			$responseCode = "404";
-			$responseDesc = "list status soal not found";
-			$responseData = $data;
+			$responseDesc = "jadwal not found";
+			$responseData = array(
+				'data_uts' => $data_uts,
+				'data_uas' => $data_uas
+			);
 			$response = resultJson( $responseCode, $responseDesc, $responseData);
 			$this->response($response, REST_Controller::HTTP_NOT_FOUND);
 		}	

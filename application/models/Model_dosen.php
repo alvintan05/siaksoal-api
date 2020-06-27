@@ -65,6 +65,7 @@ class Model_dosen extends CI_Model {
 		if ($nip != null) {			
 			$init_table_soal = $this->table_soal.' s';
 			$init_table_jadwal = $this->table_jadwal.' j';
+			$init_table_kelas = $this->table_kelas.' k';
 			$init_table_matkul = $this->table_matkul.' m';		
 			$init_table_pengurus = $this->table_pengurus.' p';
 			$array = array(
@@ -72,12 +73,14 @@ class Model_dosen extends CI_Model {
 				's.jenis_ujian' => 'UTS'
 			);
 
-			$this->db->select('s.kode_soal, j.matakuliah_kodemk, m.namamk, s.file, s.status, s.jenis_soal, p.bagian, s.note,s.create_at, s.update_at');	
+			$this->db->select('s.kode_soal, j.matakuliah_kodemk, k.namaklas, m.namamk, s.file, s.status, s.jenis_soal, p.bagian, s.note,s.create_at, s.update_at');	
 			$this->db->from($init_table_soal);
 			$this->db->join($init_table_jadwal, 's.uts_uas_kodejdwl = j.kodejdwl');
 			$this->db->join($init_table_matkul, 'j.matakuliah_kodemk = m.kodemk');
+			$this->db->join($init_table_kelas, 'j.kelas_kodeklas = k.kodeklas');
 			$this->db->join($init_table_pengurus, 's.kbk_nip = p.pengurus_uts_uas_nip');
-			$this->db->where($array);
+			$this->db->where($array);			
+			$this->db->order_by('s.update_at', 'ASC');
 
 			$data = $this->db->get();
 			return $data->result_array();
@@ -90,19 +93,78 @@ class Model_dosen extends CI_Model {
 			$init_table_soal = $this->table_soal.' s';
 			$init_table_jadwal = $this->table_jadwal.' j';
 			$init_table_matkul = $this->table_matkul.' m';			
+			$init_table_kelas = $this->table_kelas.' k';
 			$init_table_pengurus = $this->table_pengurus.' p';
 			$array = array('j.staff_nip' => $nip, 's.jenis_ujian' => 'UAS');
 
-			$this->db->select('s.kode_soal, j.matakuliah_kodemk, m.namamk, s.file, s.status, s.jenis_soal, p.bagian, s.note, s.create_at, s.update_at');
+			$this->db->select('s.kode_soal, j.matakuliah_kodemk, k.namaklas, m.namamk, s.file, s.status, s.jenis_soal, p.bagian, s.note, s.create_at, s.update_at');
 			$this->db->from($init_table_soal);
 			$this->db->join($init_table_jadwal, 's.uts_uas_kodejdwl = j.kodejdwl');
 			$this->db->join($init_table_matkul, 'j.matakuliah_kodemk = m.kodemk');
+			$this->db->join($init_table_kelas, 'j.kelas_kodeklas = k.kodeklas');
 			$this->db->join($init_table_pengurus, 's.kbk_nip = p.pengurus_uts_uas_nip');
-			$this->db->where($array);
+			$this->db->where($array);			
+			$this->db->order_by('s.update_at', 'ASC');
 
 			$data = $this->db->get();
 			return $data->result_array();
 		}
+	}
+
+	public function getStatusSoalUtsByTahun($nip, $tahun, $semester)
+	{
+		$init_table_soal = $this->table_soal.' s';
+		$init_table_jadwal = $this->table_jadwal.' j';
+		$init_table_matkul = $this->table_matkul.' m';
+		$init_table_pengurus = $this->table_pengurus.' p';
+		$init_table_kelas = $this->table_kelas.' k';
+		$init_table_tahun = $this->table_tahun.' t';		
+
+		$this->db->select('s.kode_soal, j.matakuliah_kodemk, m.namamk, k.namaklas, s.file, s.status, s.jenis_soal, p.bagian, s.note, s.create_at, s.update_at');
+		$this->db->from($init_table_soal);
+		$this->db->join($init_table_jadwal, 's.uts_uas_kodejdwl = j.kodejdwl');
+		$this->db->join($init_table_matkul, 'j.matakuliah_kodemk = m.kodemk');
+		$this->db->join($init_table_pengurus, 's.kbk_nip = p.pengurus_uts_uas_nip');		
+		$this->db->join($init_table_kelas, 'j.kelas_kodeklas = k.kodeklas');
+		$this->db->join($init_table_tahun, 'j.thn_akad_thn_akad_id = t.thn_akad_id');				
+		$this->db->where(array(
+			'j.staff_nip' => $nip,
+			's.jenis_ujian' => 'UTS',
+			't.tahun_akad' => $tahun,
+			't.semester' => $semester
+		));		
+		$this->db->order_by('s.update_at', 'ASC');
+
+		$data = $this->db->get();
+		return $data->result_array();
+	}
+
+	public function getStatusSoalUasByTahun($nip, $tahun, $semester)
+	{
+		$init_table_soal = $this->table_soal.' s';
+		$init_table_jadwal = $this->table_jadwal.' j';
+		$init_table_matkul = $this->table_matkul.' m';
+		$init_table_pengurus = $this->table_pengurus.' p';
+		$init_table_kelas = $this->table_kelas.' k';
+		$init_table_tahun = $this->table_tahun.' t';		
+
+		$this->db->select('s.kode_soal, j.matakuliah_kodemk, m.namamk, k.namaklas, s.file, s.status, s.jenis_soal, p.bagian, s.note, s.create_at, s.update_at');
+		$this->db->from($init_table_soal);
+		$this->db->join($init_table_jadwal, 's.uts_uas_kodejdwl = j.kodejdwl');
+		$this->db->join($init_table_matkul, 'j.matakuliah_kodemk = m.kodemk');
+		$this->db->join($init_table_pengurus, 's.kbk_nip = p.pengurus_uts_uas_nip');		
+		$this->db->join($init_table_kelas, 'j.kelas_kodeklas = k.kodeklas');
+		$this->db->join($init_table_tahun, 'j.thn_akad_thn_akad_id = t.thn_akad_id');			
+		$this->db->where(array(
+			'j.staff_nip' => $nip,
+			's.jenis_ujian' => 'UAS',
+			't.tahun_akad' => $tahun,
+			't.semester' => $semester
+		));		
+		$this->db->order_by('s.update_at', 'ASC');
+
+		$data = $this->db->get();
+		return $data->result_array();
 	}
 
 	public function getUpload($kode = null)
