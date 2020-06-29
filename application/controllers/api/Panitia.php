@@ -15,9 +15,9 @@ class Panitia extends REST_Controller
 		$this->load->model('Model_panitia', 'mp');
 	}
 
-	public function index_get()
+	public function soal_uts_get()
 	{
-		$data = $this->mp->getSoal();
+		$data = $this->mp->getSoalUts();
 
 		if($data) {
 			$responseCode = "200";
@@ -31,6 +31,86 @@ class Panitia extends REST_Controller
         
         $response = resultJson( $responseCode, $responseDesc, $responseData);
 		$this->response($response, REST_Controller::HTTP_OK);
+	}
+
+	public function soal_uas_get()
+	{
+		$data = $this->mp->getSoalUas();
+
+		if($data) {
+			$responseCode = "200";
+			$responseDesc = "Success get soal";
+			$responseData = $data;
+			
+		} else {
+			$responseCode = "404";
+			$responseDesc = "list not found";					
+        }	
+        
+        $response = resultJson( $responseCode, $responseDesc, $responseData);
+		$this->response($response, REST_Controller::HTTP_OK);
+	}
+	
+	public function soal_uts_by_get()
+	{		
+		$tahun = $this->get('tahun');
+		$semester = $this->get('semester');
+		$prodi = $this->get('prodi');
+
+		if($prodi == null && $tahun == null && $semester == null) {
+			$responseCode = "403";
+			$responseDesc = "Lengkapi Parameter!";			
+			$data = null;
+			$response = resultJson( $responseCode, $responseDesc, $data);
+			$this->response($response, REST_Controller::HTTP_FORBIDDEN);
+		} else {
+			$data = $this->mp->getSoalUtsBy($tahun, $semester, $prodi);
+		}		
+
+		if($data) {
+			$responseCode = "200";
+			$responseDesc = "Success get soal uts";
+			$responseData = $data;
+			$response = resultJson( $responseCode, $responseDesc, $responseData);
+			$this->response($response, REST_Controller::HTTP_OK);
+		} else {
+			$responseCode = "404";
+			$responseDesc = "soal uts not found";
+			$responseData = $data;
+			$response = resultJson( $responseCode, $responseDesc, $responseData);
+			$this->response($response, REST_Controller::HTTP_NOT_FOUND);
+		}	
+	}
+
+	public function soal_uas_by_get()
+	{		
+		$tahun = $this->get('tahun');
+		$semester = $this->get('semester');
+		$prodi = $this->get('prodi');
+
+		if($prodi == null && $tahun == null && $semester == null) {
+			$responseCode = "403";
+			$responseDesc = "Lengkapi Parameter!";			
+			$data = null;
+			$response = resultJson( $responseCode, $responseDesc, $data);
+			$this->response($response, REST_Controller::HTTP_FORBIDDEN);
+		} else {
+			$data = $this->mp->getSoalUasBy($tahun, $semester, $prodi);
+		}		
+
+		if($data) {
+			$responseCode = "200";
+			$responseDesc = "Success get soal uas";
+			$responseData = $data;
+			$response = resultJson( $responseCode, $responseDesc, $responseData);
+			$this->response($response, REST_Controller::HTTP_OK);
+		} else {
+			$responseCode = "404";
+			$responseDesc = "soal uas not found";
+			$responseData = $data;
+			$response = resultJson( $responseCode, $responseDesc, $responseData);
+			$this->response($response, REST_Controller::HTTP_NOT_FOUND);
+		}	
 	}
 
 	public function batas_waktu_get()
