@@ -37,7 +37,7 @@ class Model_kbk extends CI_Model {
 			$array = array('s.kbk_nip' =>$kbk_nip, 's.jenis_ujian' => 'UAS');
 
 
-			$this->db->select('s.kode_soal, s.file, m.namamk, st.nama, k.namaklas, t.tahun_akad, t.semester, p.namaprod, s.create_at, s.update_at' );
+			$this->db->select('s.kode_soal, s.file, m.namamk, st.nama, k.namaklas, t.tahun_akad, t.semester, p.namaprod, s.create_at, s.update_at, s.status' );
 
 			$this->db->from($init_table_soal);
 			$this->db->join($init_table_jadwal, 's.uts_uas_kodejdwl = j.kodejdwl');
@@ -68,7 +68,7 @@ class Model_kbk extends CI_Model {
 			$array = array('s.kbk_nip' =>$kbk_nip, 's.jenis_ujian' => 'UTS');
 
 
-			$this->db->select('s.kode_soal, s.file, m.namamk, st.nama, k.namaklas, t.tahun_akad, t.semester, p.namaprod, s.create_at, s.update_at' );
+			$this->db->select('s.kode_soal, s.file, m.namamk, st.nama, k.namaklas, t.tahun_akad, t.semester, p.namaprod, s.create_at, s.update_at, s.status' );
 
 			$this->db->from($init_table_soal);
 			$this->db->join($init_table_jadwal, 's.uts_uas_kodejdwl = j.kodejdwl');
