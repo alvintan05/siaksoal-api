@@ -22,7 +22,7 @@ class Model_kbk extends CI_Model {
 	// format camelCase
 	// for the result, this is a simple request you can improve by your self to make a any response
 
-	public function getDaftarSoalUas($kbk_nip = null)
+	public function getDaftarsoaluas($kbk_nip = null)
 	{
 		if ($kbk_nip != null) {
 
@@ -53,7 +53,7 @@ class Model_kbk extends CI_Model {
 		}
 	}
 
-	public function getDaftarSoalUts($kbk_nip = null)
+	public function getDaftarsoaluts($kbk_nip = null)
 	{
 		if ($kbk_nip != null) {
 

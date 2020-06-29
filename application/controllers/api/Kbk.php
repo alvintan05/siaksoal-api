@@ -90,7 +90,28 @@ class Kbk extends REST_Controller
 		$this->response($response, REST_Controller::HTTP_OK);
 
 	}
-	
+
+
+	public function daftarsoaluas_get()
+	{
+		$kbk_nip = $this->get('kbk_nip');
+
+		$data = $this->mk->getDaftarsoaluas($kbk_nip);
+
+		if ($data) {
+			$responseCode = "200";
+			$responseDesc = "Success get list status soal";
+			$responseData = $data;
+			$response = resultJson($responseCode, $responseDesc, $responseData);
+			$this->response($response, REST_Controller::HTTP_OK);
+		} else {
+			$responseCode = "404";
+			$responseDesc = "list status soal found";
+			$responseData = $data;
+			$response = resultJson($responseCode, $responseDesc, $responseData);
+			$this->response($response, REST_Controller::HTTP_NOT_FOUND);
+		}
+	}
 
 	public function daftarsoaluts_get()
 	{
@@ -109,7 +130,7 @@ class Kbk extends REST_Controller
 			$responseDesc = "list status soal found";
 			$responseData = $data;
 			$response = resultJson($responseCode, $responseDesc, $responseData);
-			$this->response($response, REST_Controller::HTTP_NOT_FOUND;
+			$this->response($response, REST_Controller::HTTP_NOT_FOUND);
 		}
 	}
     
