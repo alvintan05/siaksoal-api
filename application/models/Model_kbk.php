@@ -33,11 +33,12 @@ class Model_kbk extends CI_Model {
 			$init_table_kelas = $this->table_kelas.' k';
 			$init_table_prodi = $this->table_prodi.' p';
 			$init_table_tahun = $this->table_tahun.' t';
+			
 
 			$array = array('s.kbk_nip' =>$kbk_nip, 's.jenis_ujian' => 'UAS');
 
 
-			$this->db->select('s.kode_soal, s.file, m.namamk, st.nama, k.namaklas, t.tahun_akad, t.semester, p.namaprod, s.create_at, s.update_at, s.status' );
+			$this->db->select('s.kode_soal, s.file, m.namamk, st.nama, k.namaklas, t.tahun_akad, t.semester, p.namaprod, s.create_at, s.update_at, s.status, s.jenis_soal' );
 
 			$this->db->from($init_table_soal);
 			$this->db->join($init_table_jadwal, 's.uts_uas_kodejdwl = j.kodejdwl');
@@ -64,11 +65,11 @@ class Model_kbk extends CI_Model {
 			$init_table_kelas = $this->table_kelas.' k';
 			$init_table_prodi = $this->table_prodi.' p';
 			$init_table_tahun = $this->table_tahun.' t';
-
+			
 			$array = array('s.kbk_nip' =>$kbk_nip, 's.jenis_ujian' => 'UTS');
 
 
-			$this->db->select('s.kode_soal, s.file, m.namamk, st.nama, k.namaklas, t.tahun_akad, t.semester, p.namaprod, s.create_at, s.update_at, s.status' );
+			$this->db->select('s.kode_soal, s.file, m.namamk, st.nama, k.namaklas, t.tahun_akad, t.semester, p.namaprod, s.create_at, s.update_at, s.status, s.jenis_soal' );
 
 			$this->db->from($init_table_soal);
 			$this->db->join($init_table_jadwal, 's.uts_uas_kodejdwl = j.kodejdwl');
@@ -112,6 +113,25 @@ class Model_kbk extends CI_Model {
 		}else{
 			return false;
 		}
+	}
+
+
+	public function getJadwal($kbk_nip = null)
+	{
+		if ($kbk_nip != null) {			
+			$init_table_jadwal = $this->table_jadwal.' j';
+			$init_table_matkul = $this->table_matkul.' m';
+			$init_table_kelas = $this->table_kelas.' k';
+
+			$this->db->select('j.kodejdwl, j.matakuliah_kodemk, m.namamk, k.namaklas, j.ruangan_namaruang');			
+			$this->db->from($init_table_jadwal);
+			$this->db->join($init_table_matkul, 'j.matakuliah_kodemk = m.kodemk');
+			$this->db->join($init_table_kelas, 'j.kelas_kodeklas = k.kodeklas');
+			$this->db->where('j.staff_nip', $kbk_nip);
+	
+			$data = $this->db->get();
+			return $data->result_array();
+		}	
 	}
 	
 

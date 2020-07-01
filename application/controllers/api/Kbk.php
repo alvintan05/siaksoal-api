@@ -18,10 +18,10 @@ class Kbk extends REST_Controller
 	public function index_get()
 	{
 		// Masih bingung yang di pake id apa 
-		$nip = $this->get('nip');
+		$kbk_nip = $this->get('kbk_nip');
 
 		// tabel masih rancu
-		$data = $this->mk->getJadwal($nip);	
+		$data = $this->mk->getJadwal($kbk_nip);	
 
 		if($data) {
 			$responseCode = "200";
@@ -64,12 +64,12 @@ class Kbk extends REST_Controller
 		$responseData = null;
 		$upload = null;
 
-		if($status == 'Approve') {
+		if($status == 'Diterima') {
 			$upload = array(			
 				'note' => $this->put('note'),
 				'status' => $this->put('status')
 			);
-		} else if ($status == 'Reject') {
+		} else if ($status == 'Ditolak') {
 			$upload = array(			
 				'note' => $this->put('note'),
 				'status' => $this->put('status')
