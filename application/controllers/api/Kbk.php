@@ -80,10 +80,12 @@ class Kbk extends REST_Controller
 
 		if($result) {
 			$responseCode = "200";
-			$responseDesc = "Success update approval status";						
+			$responseDesc = "Success update approval status";	
+			$responseData = 'berhasil';			
 		} else {
 			$responseCode = "404";
-			$responseDesc = "id not found";			
+			$responseDesc = "id not found";
+			$responseData = 'gagal';
 		}	
 
 		$response = resultJson( $responseCode, $responseDesc, $responseData);
