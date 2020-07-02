@@ -177,36 +177,50 @@ class Dosen extends REST_Controller
 		
 	}
 
-	public function daftar_status_soal_get()
+	public function daftar_status_soal_uts_get()
 	{	
 		$nip = $this->get('nip');
 
-		$data_uts = $this->md->getStatusListUts($nip);
-		$data_uas = $this->md->getStatusListUas($nip);	
+		$data_uts = $this->md->getStatusListUts($nip);		
 
-		if($data_uts || $data_uas) {			
+		if($data_uts) {			
 			$responseCode = "200";
-			$responseDesc = "Success get list status soal";
-			$responseData = array(
-				'data_uts' => $data_uts,
-				'data_uas' => $data_uas
-			);
+			$responseDesc = "Success get list status soal uts";
+			$responseData = $data_uts;
 			$response = resultJson( $responseCode, $responseDesc, $responseData);
 			$this->response($response, REST_Controller::HTTP_OK);
 		} else {
 			$responseCode = "404";
-			$responseDesc = "list status soal not found";
-			$responseData = array(
-				'data_uts' => $data_uts,
-				'data_uas' => $data_uas
-			);
+			$responseDesc = "list status soal uts not found";
+			$responseData = $data_uts;
+			$response = resultJson( $responseCode, $responseDesc, $responseData);
+			$this->response($response, REST_Controller::HTTP_NOT_FOUND);
+		}	
+	}
+
+	public function daftar_status_soal_uas_get()
+	{	
+		$nip = $this->get('nip');
+		
+		$data_uas = $this->md->getStatusListUas($nip);	
+
+		if($data_uas) {			
+			$responseCode = "200";
+			$responseDesc = "Success get list status soal uas";
+			$responseData = $data_uas;
+			$response = resultJson( $responseCode, $responseDesc, $responseData);
+			$this->response($response, REST_Controller::HTTP_OK);
+		} else {
+			$responseCode = "404";
+			$responseDesc = "list status soal uas not found";
+			$responseData = $data_uas;
 			$response = resultJson( $responseCode, $responseDesc, $responseData);
 			$this->response($response, REST_Controller::HTTP_NOT_FOUND);
 		}	
 	}
 
 	// Dapatkan daftar status soal berdasarkan tahun dan semester
-	public function status_soal_by_get()
+	public function status_soal_uts_by_get()
 	{
 		$nip = $this->get('nip');
 		$tahun = $this->get('tahun');
@@ -219,26 +233,50 @@ class Dosen extends REST_Controller
 			$response = resultJson( $responseCode, $responseDesc, $data);
 			$this->response($response, REST_Controller::HTTP_FORBIDDEN);
 		} else {
-			$data_uts = $this->md->getStatusSoalUtsByTahun($nip, $tahun, $semester);
-			$data_uas = $this->md->getStatusSoalUasByTahun($nip, $tahun, $semester);
+			$data_uts = $this->md->getStatusSoalUtsByTahun($nip, $tahun, $semester);			
 		}		
 
-		if($data_uts || $data_uas) {
+		if($data_uts) {
 			$responseCode = "200";
-			$responseDesc = "Success get jadwal";
-			$responseData = array(
-				'data_uts' => $data_uts,
-				'data_uas' => $data_uas
-			);
+			$responseDesc = "Success get status soal uts";
+			$responseData = $data_uts;
 			$response = resultJson( $responseCode, $responseDesc, $responseData);
 			$this->response($response, REST_Controller::HTTP_OK);
 		} else {
 			$responseCode = "404";
-			$responseDesc = "jadwal not found";
-			$responseData = array(
-				'data_uts' => $data_uts,
-				'data_uas' => $data_uas
-			);
+			$responseDesc = "status soal uts not found";
+			$responseData = $data_uts;
+			$response = resultJson( $responseCode, $responseDesc, $responseData);
+			$this->response($response, REST_Controller::HTTP_NOT_FOUND);
+		}	
+	}
+
+	public function status_soal_uas_by_get()
+	{
+		$nip = $this->get('nip');
+		$tahun = $this->get('tahun');
+		$semester = $this->get('semester');
+
+		if($nip == null && $tahun == null && $semester == null) {
+			$responseCode = "403";
+			$responseDesc = "Lengkapi Parameter!";			
+			$data = null;
+			$response = resultJson( $responseCode, $responseDesc, $data);
+			$this->response($response, REST_Controller::HTTP_FORBIDDEN);
+		} else {			
+			$data_uas = $this->md->getStatusSoalUasByTahun($nip, $tahun, $semester);
+		}		
+
+		if($data_uas) {
+			$responseCode = "200";
+			$responseDesc = "Success get status soal uas";
+			$responseData = $data_uas;
+			$response = resultJson( $responseCode, $responseDesc, $responseData);
+			$this->response($response, REST_Controller::HTTP_OK);
+		} else {
+			$responseCode = "404";
+			$responseDesc = "status soal uas not found";
+			$responseData = $data_uas;
 			$response = resultJson( $responseCode, $responseDesc, $responseData);
 			$this->response($response, REST_Controller::HTTP_NOT_FOUND);
 		}	
