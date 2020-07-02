@@ -36,7 +36,7 @@ class Model_kps extends CI_Model {
 			$init_table_tahun = $this->table_tahun.' t';
 			$init_table_prodi = $this->table_prodi.' p';
 
-			$this->db->select('s.kode_soal, s.file, s.jenis_ujian, m.namamk, st.nama as "dosen_pembuat", k.namaklas, t.tahun_akad, t.semester, p.namaprod, s.create_at, s.update_at');
+			$this->db->select('s.kode_soal, s.file, s.jenis_ujian, s.jenis_soal, m.namamk, st.nama as "dosen_pembuat", k.namaklas, t.tahun_akad, t.semester, p.namaprod, s.create_at, s.update_at');
 			$this->db->from($init_table_soal);			
 			$this->db->join($init_table_jadwal, 's.uts_uas_kodejdwl = j.kodejdwl');
 			$this->db->join($init_table_matkul, 'j.matakuliah_kodemk = m.kodemk');
