@@ -17,8 +17,7 @@ class Kps extends REST_Controller
 	
 	public function search_get()
 	{   
-        $responseData = null;
-        // masih belum selesai
+        $responseData = null;        
 		$search = array(			
 			'tahun' => $this->get('tahun'),
 			'semester' => $this->get('semester'),

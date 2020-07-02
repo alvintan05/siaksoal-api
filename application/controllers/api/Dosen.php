@@ -127,26 +127,24 @@ class Dosen extends REST_Controller
 		}			
 	}
 
+	// public function nip_kbk_get($jenis)
+	// {	
+	// 	return $this->md->getKbkNip($jenis);
+	// }
+
+	private function nip_kbk($jenis)
+	{					
+		return $this->md->getKbkNip($jenis);
+	}
+
 	// Insert upload soal
 	public function upload_post()
 	{
-		$responseData = null;
-		$kbk_nip = 0;
+		$responseData = null;		
 
-		switch ($this->post('kbk_nip')) {
-			case 'kbkRPL':				
-				$kbk_nip = 11111;
-				break;
-			case 'kbkMultimedia':
-				$kbk_nip = 99999;
-				break;
-			case 'kbkCB':
-				$kbk_nip = 64739;
-				break;
-			case 'kbkJE':
-				$kbk_nip = 74839;
-				break;					
-		}
+		$kbk = $this->post('kbk_nip');
+
+		$kbk_nip = $this->nip_kbk($kbk);
 
 		$upload = array(		
 			'file' => $this->post('file'),
@@ -316,36 +314,20 @@ class Dosen extends REST_Controller
 	{			
 		$kode = $this->put('kode');
 		$responseData = null;
-
-		$kbk_nip = 0;
-
-		switch ($this->put('kbk_nip')) {
-			case 'kbkRPL':				
-				$kbk_nip = 11111;
-				break;
-			case 'kbkMultimedia':
-				$kbk_nip = 99999;
-				break;
-			case 'kbkCB':
-				$kbk_nip = 64739;
-				break;
-			case 'kbkJE':
-				$kbk_nip = 74839;
-				break;					
-		}
+		
+		$kbk = $this->put('kbk_nip');
+		$kbk_nip = $this->nip_kbk($kbk);
 
 		$upload = array();
 		if($this->put('file') == NULL){
-			$upload = array(							
-				'jenis_ujian' => $this->put('jenis_ujian'),	
+			$upload = array(											
 				'jenis_soal' => $this->put('jenis_soal'),
 				'kbk_nip' => $kbk_nip,
 				'update_at'	=> date('y-m-d')
 			);
 		} else {
 			$upload = array(			
-				'file' => $this->put('file'),	
-				'jenis_ujian' => $this->put('jenis_ujian'),	
+				'file' => $this->put('file'),					
 				'jenis_soal' => $this->put('jenis_soal'),
 				'kbk_nip' => $kbk_nip,
 				'update_at'	=> date('y-m-d')

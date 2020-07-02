@@ -20,7 +20,6 @@ class Kbk extends REST_Controller
 
 	}
 
-	// Masih error
 	public function approval_put()
 	{
 		$status = $this->put('status');

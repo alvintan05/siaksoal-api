@@ -167,6 +167,17 @@ class Model_dosen extends CI_Model {
 		return $data->result_array();
 	}
 
+	public function getKbkNip($jenis)
+	{	
+		$this->db->select('pengurus_uts_uas_nip');
+		$this->db->from($this->table_pengurus);		
+		$this->db->where('bagian', $jenis);
+
+		$result = $this->db->get();
+
+		return $result->row()->pengurus_uts_uas_nip;
+	}
+
 	public function getUpload($kode = null)
 	{	
 		if ($kode != null) {			

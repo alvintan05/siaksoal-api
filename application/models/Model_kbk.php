@@ -161,5 +161,5 @@ class Model_kbk extends CI_Model {
 
 }
 
-/* End of file Model_dosen.php */
-/* Location: ./application/models/Model_dosen.php */
+/* End of file Model_kbk.php */
+/* Location: ./application/models/Model_kbk.php */
