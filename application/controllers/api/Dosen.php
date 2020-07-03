@@ -127,11 +127,6 @@ class Dosen extends REST_Controller
 		}			
 	}
 
-	// public function nip_kbk_get($jenis)
-	// {	
-	// 	return $this->md->getKbkNip($jenis);
-	// }
-
 	private function nip_kbk($jenis)
 	{					
 		return $this->md->getKbkNip($jenis);
