@@ -12,7 +12,7 @@ class Model_kps extends CI_Model {
 	private $table_staff = 'tik.staff';
 	private $table_tahun = 'tik.thn_akad';
 	private $table_prodi = 'tik.prodi';
-	
+	private $table_pengurus = 'tik.pengurus_uts_uas';
 
 	// for naming your function
 	// please use get for selecting data or getting data 
@@ -35,8 +35,9 @@ class Model_kps extends CI_Model {
 			$init_table_staff = $this->table_staff.' st';
 			$init_table_tahun = $this->table_tahun.' t';
 			$init_table_prodi = $this->table_prodi.' p';
+			$init_table_pengurus = $this->table_pengurus.' pe';
 
-			$this->db->select('s.kode_soal, s.file, s.jenis_ujian, s.jenis_soal, m.namamk, st.nama as "dosen_pembuat", k.namaklas, t.tahun_akad, t.semester, p.namaprod, s.create_at, s.update_at, j.matakuliah_kodemk');
+			$this->db->select('s.kode_soal, s.file, s.jenis_ujian, s.jenis_soal, m.namamk, st.nama as "dosen_pembuat", pe.bagian, k.namaklas, t.tahun_akad, t.semester, p.namaprod, s.create_at, s.update_at, j.matakuliah_kodemk');
 			$this->db->from($init_table_soal);			
 			$this->db->join($init_table_jadwal, 's.uts_uas_kodejdwl = j.kodejdwl');
 			$this->db->join($init_table_matkul, 'j.matakuliah_kodemk = m.kodemk');
@@ -44,6 +45,7 @@ class Model_kps extends CI_Model {
 			$this->db->join($init_table_kelas, 'j.kelas_kodeklas = k.kodeklas');
 			$this->db->join($init_table_tahun, 'j.thn_akad_thn_akad_id = t.thn_akad_id');
 			$this->db->join($init_table_prodi, 'k.prodi_prodi_id = p.prodi_id');
+			$this->db->join($init_table_pengurus, 's.kbk_nip = pe.pengurus_uts_uas_nip');
 			$this->db->where('t.tahun_akad', $search['tahun']);
 			$this->db->where('t.semester', $search['semester']);
 			$this->db->where('s.jenis_ujian', $search['jenisSoal']);
