@@ -48,6 +48,7 @@ class Model_kps extends CI_Model {
 			$this->db->where('t.semester', $search['semester']);
 			$this->db->where('s.jenis_ujian', $search['jenisSoal']);
 			$this->db->where('p.namaprod', $search['namaProdi']);
+			$this->db->where('s.status', 'Proses');
 
 			$data = $this->db->get();
 			return $data->result_array();
