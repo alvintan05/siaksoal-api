@@ -32,6 +32,7 @@ class Model_dosen extends CI_Model {
 			$this->db->join($init_table_matkul, 'j.matakuliah_kodemk = m.kodemk');
 			$this->db->join($init_table_kelas, 'j.kelas_kodeklas = k.kodeklas');
 			$this->db->where('j.staff_nip', $nip);
+			$this->db->order_by('m.namamk', 'ASC');
 	
 			$data = $this->db->get();
 			return $data->result_array();
@@ -257,6 +258,7 @@ class Model_dosen extends CI_Model {
 	{
 		$this->db->select('tahun_akad');
 		$this->db->from($this->table_tahun);
+		$this->db->order_by('tahun_akad', 'ASC');
 		$this->db->distinct();
 		$data = $this->db->get();
 		return $data->result_array();

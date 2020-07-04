@@ -135,14 +135,15 @@ class Model_panitia extends CI_Model {
 
 	public function getBatasWaktu()
 	{				
-		$this->db->from($this->table_batas);							
+		$this->db->from($this->table_batas);	
+		$this->db->order_by('id', 'ASC');
 		$data = $this->db->get();
 		return $data->result_array();
 	}	
 
 	public function updateBatasWaktu($upload, $jenis)
 	{
-		$this->db->where('jenis_ujian', $jenis);
+		$this->db->where('jenis_ujian', $jenis);		
 		$query = $this->db->update($this->table_batas,$upload);
 
 		if ($this->db->affected_rows() == 1) {

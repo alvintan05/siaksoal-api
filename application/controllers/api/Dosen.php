@@ -146,8 +146,8 @@ class Dosen extends REST_Controller
 			'jenis_ujian' => $this->post('jenis_ujian'),
 			'jenis_soal' => $this->post('jenis_soal'),
 			'status' => 'Proses',			
-			'create_at' => date('y-m-d'),
-			'update_at' => date('y-m-d'),
+			'create_at' => date('Y-m-d'),
+			'update_at' => date('Y-m-d'),
 			'uts_uas_kodejdwl' => $this->post('uts_uas_kodejdwl'),
 			'kbk_nip' => $kbk_nip
 		);
@@ -318,14 +318,14 @@ class Dosen extends REST_Controller
 			$upload = array(											
 				'jenis_soal' => $this->put('jenis_soal'),
 				'kbk_nip' => $kbk_nip,
-				'update_at'	=> date('y-m-d')
+				'update_at'	=> date('Y-m-d')
 			);
 		} else {
 			$upload = array(			
 				'file' => $this->put('file'),					
 				'jenis_soal' => $this->put('jenis_soal'),
 				'kbk_nip' => $kbk_nip,
-				'update_at'	=> date('y-m-d')
+				'update_at'	=> date('Y-m-d')
 			);
 		}		
 
