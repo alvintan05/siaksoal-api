@@ -30,12 +30,14 @@ class Kbk extends REST_Controller
 		if($status == 'Diterima') {
 			$upload = array(			
 				'note' => $this->put('note'),
-				'status' => $this->put('status')
+				'status' => $this->put('status'),
+				'update_at'	=> date('Y-m-d')
 			);
 		} else if ($status == 'Ditolak') {
 			$upload = array(			
 				'note' => $this->put('note'),
-				'status' => $this->put('status')
+				'status' => $this->put('status'),
+				'update_at'	=> date('Y-m-d')
 			);
 		}
 
@@ -211,7 +213,7 @@ class Kbk extends REST_Controller
 
 		$data = array(						
 			'file' => $this->put('file'),			
-			'upload_time'	=> date('y-m-d')
+			'upload_time'	=> date('Y-m-d')
 		);	
 
 		$query = $this->mk->updateFormat($jenis_ujian, $data);
