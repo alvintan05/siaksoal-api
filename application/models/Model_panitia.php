@@ -14,6 +14,7 @@ class Model_panitia extends CI_Model {
 	private $table_tahun = 'tik.thn_akad';
 	private $table_prodi = 'tik.prodi';
 	private $table_pengurus = 'tik.pengurus_uts_uas';
+	private $table_format = 'tik.format_soal';
 	
 	// for naming your function
 	// please use get for selecting data or getting data 
@@ -145,6 +146,36 @@ class Model_panitia extends CI_Model {
 	{
 		$this->db->where('jenis_ujian', $jenis);		
 		$query = $this->db->update($this->table_batas,$upload);
+
+		if ($this->db->affected_rows() == 1) {
+			return true;
+		}else{
+			return false;
+		}
+	}
+
+	public function getFormatUts()
+	{		
+		$this->db->from($this->table_format);		
+		$this->db->where('jenis_ujian', 'UTS');		
+
+		$data = $this->db->get();
+		return $data->result_array();
+	}
+
+	public function getFormatUas()
+	{		
+		$this->db->from($this->table_format);		
+		$this->db->where('jenis_ujian', 'UAS');		
+
+		$data = $this->db->get();
+		return $data->result_array();
+	}
+
+	public function updateFormat($jenis_ujian, $data)
+	{
+		$this->db->where('jenis_ujian', $jenis_ujian);
+		$query = $this->db->update($this->table_format, $data);
 
 		if ($this->db->affected_rows() == 1) {
 			return true;

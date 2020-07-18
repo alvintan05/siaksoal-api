@@ -156,6 +156,73 @@ class Panitia extends REST_Controller
 		$this->response($response, REST_Controller::HTTP_OK);
 	}	
 
+	// Data di halaman upload format soal uts
+	public function format_uts_get()
+	{
+		$data = $this->mp->getFormatUts();
+
+		if($data) {
+			$responseCode = "200";
+			$responseDesc = "Success get uts";
+			$responseData = $data;
+			$response = resultJson( $responseCode, $responseDesc, $responseData);
+			$this->response($response, REST_Controller::HTTP_OK);
+		} else {
+			$responseCode = "404";
+			$responseDesc = "uts not found";
+			$responseData = $data;
+			$response = resultJson( $responseCode, $responseDesc, $responseData);
+			$this->response($response, REST_Controller::HTTP_NOT_FOUND);
+		}	
+	}
+
+	// Data di halaman upload format soal uas
+	public function format_uas_get()
+	{
+		$data = $this->mp->getFormatUas();
+
+		if($data) {
+			$responseCode = "200";
+			$responseDesc = "Success get uas";
+			$responseData = $data;
+			$response = resultJson( $responseCode, $responseDesc, $responseData);
+			$this->response($response, REST_Controller::HTTP_OK);
+		} else {
+			$responseCode = "404";
+			$responseDesc = "uas not found";
+			$responseData = $data;
+			$response = resultJson( $responseCode, $responseDesc, $responseData);
+			$this->response($response, REST_Controller::HTTP_NOT_FOUND);
+		}	
+	}
+
+	public function upload_format_put()
+	{							
+		$responseData = null;					
+
+		$jenis_ujian = $this->put('jenis_ujian');
+
+		$data = array(						
+			'file' => $this->put('file'),			
+			'upload_time'	=> date('Y-m-d')
+		);	
+
+		$query = $this->mp->updateFormat($jenis_ujian, $data);
+
+		if ($query) {
+			$responseCode = "200";
+			$responseDesc = "Success update";
+		}
+		else{	
+			$responseCode = "400";
+			$responseDesc = "Failed update";
+		}
+
+		$response = resultJson( $responseCode, $responseDesc, $responseData);
+
+		$this->response($response, REST_Controller::HTTP_OK);
+	}
+	
 	// public function nip_dosen_get()
 	// {
 	// 	$data = $this->mp->getNipDosen();
