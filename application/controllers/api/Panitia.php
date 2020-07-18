@@ -155,5 +155,50 @@ class Panitia extends REST_Controller
 
 		$this->response($response, REST_Controller::HTTP_OK);
 	}	
+
+	// public function nip_dosen_get()
+	// {
+	// 	$data = $this->mp->getNipDosen();
+
+	// 	if($data) {
+	// 		$responseCode = "200";
+	// 		$responseDesc = "Success get nip";
+	// 		$responseData = $data;
+			
+	// 	} else {
+	// 		$responseCode = "404";
+	// 		$responseDesc = "list not found";					
+ //        }	
+        
+ //        $response = resultJson( $responseCode, $responseDesc, $responseData);
+	// 	$this->response($response, REST_Controller::HTTP_OK);
+	// }
+
+	// public function list_matkul_get()
+	// {
+	// 	$nip = $this->get('nip');
+
+	// 	$data_jadwal = $this->mp->getListMatkul($nip);
+	// 	$data_status = array();
+
+	// 	if($data_jadwal) {
+	// 		foreach ($data_jadwal as $result) {				
+	// 			array_push($data_status, $this->mp->getMatkulStatus($result['kodejdwl']));
+	// 		}
+	// 		$responseCode = "200";
+	// 		$responseDesc = "Success get list";
+	// 		$responseData = array(
+	// 			'data_jadwal' => $data_jadwal,
+	// 			'data_status' => $data_status
+	// 		);
+			
+	// 	} else {
+	// 		$responseCode = "404";
+	// 		$responseDesc = "list not found";					
+ //        }	
+        
+ //        $response = resultJson( $responseCode, $responseDesc, $responseData);
+	// 	$this->response($response, REST_Controller::HTTP_OK);	
+	// }
 	   
 }

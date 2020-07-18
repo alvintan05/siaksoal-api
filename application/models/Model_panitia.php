@@ -153,6 +153,57 @@ class Model_panitia extends CI_Model {
 		}
 	}
 
+	// public function getNipDosen()
+	// {
+	// 	$init_table_staff = $this->table_staff.' dsn';				
+	// 	$init_table_pengurus = $this->table_pengurus.' pe';
+
+	// 	$this->db->select('dsn.nama, pe.pengurus_uts_uas_nip');
+	// 	$this->db->from($init_table_pengurus);
+	// 	$this->db->join($init_table_staff, 'pe.pengurus_uts_uas_nip = dsn.nip');
+	// 	$this->db->where('pe.bagian', 'Dosen');
+
+	// 	$data = $this->db->get();
+	// 	return $data->result_array();
+	// }
+
+	// public function getListMatkul($nip)
+	// {
+	// 	$init_table_jadwal = $this->table_jadwal.' j';
+	// 	$init_table_matkul = $this->table_matkul.' m';
+	// 	$init_table_kelas = $this->table_kelas.' k';		
+
+	// 	$this->db->select('j.kodejdwl, j.matakuliah_kodemk, m.namamk, k.namaklas, j.ruangan_namaruang');
+	// 	$this->db->from($init_table_jadwal);
+	// 	$this->db->join($init_table_matkul, 'j.matakuliah_kodemk = m.kodemk');
+	// 	$this->db->join($init_table_kelas, 'j.kelas_kodeklas = k.kodeklas');
+	// 	$this->db->where('j.staff_nip', $nip);		
+	// 	$this->db->order_by('j.kodejdwl', 'ASC');		
+
+	// 	$data = $this->db->get();
+	// 	return $data->result_array();
+	// }
+
+	// public function getMatkulStatus($kode)
+	// {	
+
+	// 	$this->db->select('status, update_at');		
+	// 	$this->db->from($this->table_soal);
+	// 	$this->db->where('uts_uas_kodejdwl', $kode);
+	// 	$this->db->order_by('update_at', 'DESC');
+	// 	$this->db->limit(1);
+
+	// 	$data = $this->db->get();
+
+	// 	if ($data->num_rows() > 0){
+	// 		$hasil = $data->result();
+	//         return $hasil[0]->status;
+	//     }
+	//     else{
+	//         return 'belum upload';
+	//     }		
+	// }
+
 }
 
 /* End of file Model_panitia.php */
